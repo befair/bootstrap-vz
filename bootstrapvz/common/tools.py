@@ -3,8 +3,6 @@ import os
 
 
 def log_check_call(command, stdin=None, env=None, shell=False, cwd=None):
-    env = env or {}
-    env['PATH'] = env.get('PATH', '') + ':/usr/sbin:/sbin:/bin:/usr/bin'
     status, stdout, stderr = log_call(command, stdin, env, shell, cwd)
     from subprocess import CalledProcessError
     if status != 0:
@@ -23,6 +21,9 @@ def log_call(command, stdin=None, env=None, shell=False, cwd=None):
     from multiprocessing.dummy import Pool as ThreadPool
     from os.path import realpath
 
+    env = env or {}
+    env['PATH'] = env.get('PATH', '') + ':/usr/sbin:/sbin:/bin:/usr/bin'
+    env['DEBIAN_FRONTEND'] = env.get('DEBIAN_FRONTEND', 'noninteractive')
     command_log = realpath(command[0]).replace('/', '.')
     log = logging.getLogger(__name__ + command_log)
     if isinstance(command, list):
