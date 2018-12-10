@@ -26,9 +26,9 @@ def log_call(command, stdin=None, env=None, shell=False, cwd=None):
     command_log = realpath(command[0]).replace('/', '.')
     log = logging.getLogger(__name__ + command_log)
     if isinstance(command, list):
-        log.debug('Executing: {command}'.format(command=' '.join(command)))
+        log.debug('Executing: {command} env={env}'.format(command=' '.join(command), env=env))
     else:
-        log.debug('Executing: {command}'.format(command=command))
+        log.debug('Executing: {command} env={env}'.format(command=command, env=env))
 
     process = subprocess.Popen(args=command, env=env, shell=shell, cwd=cwd,
                                stdin=subprocess.PIPE,
