@@ -33,8 +33,7 @@ class GenerateLocale(Task):
         sed_i(locale_gen, search, locale_str)
 
         log_check_call(['chroot', info.root, 'locale-gen'])
-        log_check_call(['chroot', info.root,
-                        'update-locale', 'LANG=' + lang])
+        log_check_call(['chroot', info.root, 'update-locale', 'LANG=' + lang])
 
 
 class SetTimezone(Task):

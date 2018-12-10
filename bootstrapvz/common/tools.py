@@ -3,6 +3,8 @@ import os
 
 
 def log_check_call(command, stdin=None, env=None, shell=False, cwd=None):
+    env = env or {}
+    env['PATH'] = env.get('PATH', '') + ':/usr/sbin:/sbin:/bin:/usr/bin'
     status, stdout, stderr = log_call(command, stdin, env, shell, cwd)
     from subprocess import CalledProcessError
     if status != 0:

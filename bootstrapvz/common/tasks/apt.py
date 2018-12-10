@@ -213,11 +213,11 @@ class AptUpgrade(Task):
                             'apt-get', 'install',
                                        '--fix-broken',
                                        '--no-install-recommends',
-                                       '--assume-yes'])
+                                       '--assume-yes', '--allow-unauthenticated'])
             log_check_call(['chroot', info.root,
                             'apt-get', 'upgrade',
                                        '--no-install-recommends',
-                                       '--assume-yes'])
+                                       '--assume-yes', '--allow-unauthenticated'])
         except CalledProcessError as e:
             if e.returncode == 100:
                 msg = ('apt exited with status code 100. '
